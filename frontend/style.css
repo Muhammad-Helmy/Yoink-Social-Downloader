@@ -1333,6 +1333,11 @@ input[type="text"].input-url {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  max-height: calc(100vh - 380px);
+  padding-right: 6px;
+  scrollbar-gutter: stable;
 }
 
 /* Individual Queued Task Card */
@@ -1481,27 +1486,72 @@ input[type="text"].input-url {
 }
 
 /* ==========================================================================
-   VIEW: DOWNLOAD HISTORY (Max 10 Items)
+   VIEW: DOWNLOAD HISTORY (Max 10 Items - Guaranteed Full Scrolling)
    ========================================================================== */
+
+#view-history {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  display: none;
+}
+
+#view-history.active {
+  display: flex;
+}
 
 .history-panel-card {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
 }
 
 .history-top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
   border-bottom: var(--glass-border-subtle);
+  flex-shrink: 0;
 }
 
 .history-list-wrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  min-height: 140px;
+  max-height: 100%;
+  padding-right: 8px;
+  padding-bottom: 24px;
+  scrollbar-gutter: stable;
+}
+
+.history-list-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-list-wrapper::-webkit-scrollbar-track {
+  background: rgba(8, 14, 26, 0.45);
+  border-radius: var(--radius-full);
+}
+
+.history-list-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.45);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 242, 254, 0.6);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+
+.history-list-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 16px var(--accent-cyan);
 }
 
 .history-item-row {
